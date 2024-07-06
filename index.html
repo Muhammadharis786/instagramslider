@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+       
+        .list{
+            top: 0;
+
+        }
+        .item{
+            position: absolute;
+            opacity: 0;
+            transition: 0.3s ease-in-out;
+            
+
+
+        }
+         img{
+
+            height: 600px;
+            width: 400px;
+            object-fit: cover;
+            }
+
+
+      .active{
+            opacity: 1;
+            z-index: 10;
+        }
+        .circle{
+            position: absolute;
+            display: flex;
+            z-index: 99;
+            top: 75%;
+            left: 170px;
+        }
+        .items{
+            transition: 0.3s ease-in-out;
+            height:15px;
+            margin: 2px;
+            width: 15px;
+            border-radius: 100%;
+            display: inline-block;
+          
+           background-color: rgb(215, 218, 218);
+
+
+        }
+      .items.actives{
+        background-color: rgb(111, 116, 116);
+        
+
+
+      }
+      .btns{
+        opacity: 0.7;
+        width: 390px;
+        padding-left: 5px;
+        padding-right: 5px;
+        display: flex;
+        justify-content: space-between;
+        position: absolute;
+        z-index: 10;
+        top: 40%;
+      }
+      .btns img{
+        height: 25px;
+        width: 25px;
+      }
+     
+      #next{
+        transform: rotate(180deg);
+
+      }
+      #next,#prev{
+       
+      }
+    
+    </style>
+</head>
+<body>
+    <div class="slider">
+
+        <div class="list">
+
+            <div class="item active">
+                <img src="1.jpeg" >
+            </div>
+
+            <div class="item ">
+                <img src="2.jpeg"  >
+            </div>
+
+            <div class="item">
+                <img src="3.jpeg"  >
+            </div>
+
+            <div class="item">
+                <img src="4.jpeg"  >
+            </div>
+
+            <div class="item">
+                <img src="5.jpeg"  >
+            </div>
+
+        </div>
+
+        <div class="circle">
+            <div class="items actives">
+                
+            </div>
+           
+            <div class="items">
+                
+            </div>
+            <div class="items">
+
+            </div>
+            <div class="items">
+                
+            </div>
+            <div class="items">
+            </div>
+        </div>
+        <div class="btns">
+            
+            <img src="icon.svg" alt="" id="prev">
+            <img src="icon.svg" alt="" id="next">
+
+        </div>
+    </div>
+<script>
+ var item =document.querySelectorAll('.list .item')
+var cirlce =document.querySelectorAll('.items')
+var prev=document.getElementById('prev')
+var next=document.getElementById('next')
+let itemactive=0;
+let countitem=item.length
+
+
+
+prev.onclick=function(){
+    itemactive-=1
+    if(itemactive<0){
+        itemactive=countitem-1
+    }
+showSlider()
+}
+
+
+
+next.onclick=function(){
+    itemactive+=1
+    if(itemactive>=countitem){
+        itemactive=0
+    }
+showSlider()
+}
+
+
+function showSlider(){
+    var olditem =document.querySelector('.item.active')
+    var circleitem =document.querySelector('.items.actives')
+    olditem.classList.remove('active')
+    circleitem.classList.remove('actives')
+
+
+    item[itemactive].classList.add('active')
+    cirlce[itemactive].classList.add('actives')
+
+}
+
+cirlce.forEach((circle,index)=>{
+circle.addEventListener('click',()=>{
+    itemactive=index
+    showSlider()
+})
+})
+
+</script>
+    
+</body>
+</html>
